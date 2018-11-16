@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { Thumbnail, Button } from 'native-base';
 import {
   View,
   Image,
-  Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-// import { Button } from 'react-native-elements';
-// import Text from '../Text';
-// import * as Constants from '../../commons/Constants';
-// import { TextField } from 'react-native-material-textfield';
-// import { isEmail, isPhoneNumber } from '../../commons/Utils';
+import { Button } from 'react-native-elements';
+import Text from '../Text';
+import * as Constants from '../../commons/Constants';
+import { TextField } from 'react-native-material-textfield';
+import { isEmail, isPhoneNumber } from '../../commons/Utils';
 
-// import * as EventTypes from '../../actions/EventTypes';
+import * as EventTypes from '../../actions/EventTypes';
 // var Analytics = require('react-native-firebase-analytics');
 // import {_setUpGoogleSignIn, _signIn, _signOut} from '../../services/GoogleLoginService';
 // import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
@@ -29,120 +27,119 @@ export default class Login extends Component {
       progress: false,
       writeSomething: null
     };
-    // this.logIn = this.logIn.bind(this);
-    // this.handleSignupPress = this.handleSignupPress.bind(this);
-    // this.forgotPassword = this.forgotPassword.bind(this);
+    this.logIn = this.logIn.bind(this);
+    this.handleSignupPress = this.handleSignupPress.bind(this);
+    this.forgotPassword = this.forgotPassword.bind(this);
   }
 
-  // componentDidMount() {
-  //   const { getState, loginState, navigator, userState } = this.props;
-  //   getState();
-  //   if (loginState.loggedIn) {
-  //     navigator.replace({ id: 'home' });
-  //   }
-  // }
+  componentDidMount() {
+    const { getState, loginState, navigator, userState } = this.props;
+    getState();
+    if (loginState.loggedIn) {
+      navigator.replace({ id: 'home' });
+    }
+  }
 
-  // componentWillReceiveProps(nextProps) {
-  //   const prevLoginState = this.props.loginState;
-  //   const nextLoginState = nextProps.loginState;
-  //   const { showAlert } = nextProps;
-  //   if (nextLoginState.loggedIn === true && prevLoginState.loggedIn === false) {
-  //     this.setState({ buttonState: 'idle', progress: true });
-  //     // Analytics.logEvent(EventTypes.LOGIN_EVENT, {username: nextLoginState.user.name});
-  //     nextProps.loginState.nextRoute = null;
-  //     nextProps.navigator.replace({ id: 'home' });
-  //   }
-  //   if (prevLoginState.error === false && nextLoginState.error === true) {
-  //     showAlert('info', 'Login Error', nextProps.loginState.message, [
-  //       { text: 'OK' }
-  //     ]);
-  //     this.setState({ buttonState: 'idle', progress: false });
-  //   }
-  //   if (!prevLoginState.loggingIn && nextLoginState.loggingIn) {
-  //     this.setState({ buttonState: 'busy' });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    const prevLoginState = this.props.loginState;
+    const nextLoginState = nextProps.loginState;
+    const { showAlert } = nextProps;
+    if (nextLoginState.loggedIn === true && prevLoginState.loggedIn === false) {
+      this.setState({ buttonState: 'idle', progress: true });
+      // Analytics.logEvent(EventTypes.LOGIN_EVENT, {username: nextLoginState.user.name});
+      nextProps.loginState.nextRoute = null;
+      nextProps.navigator.replace({ id: 'home' });
+    }
+    if (prevLoginState.error === false && nextLoginState.error === true) {
+      showAlert('info', 'Login Error', nextProps.loginState.message, [
+        { text: 'OK' }
+      ]);
+      this.setState({ buttonState: 'idle', progress: false });
+    }
+    if (!prevLoginState.loggingIn && nextLoginState.loggingIn) {
+      this.setState({ buttonState: 'busy' });
+    }
+  }
 
-  // logIn() {
-  //   const { loginState, login, showAlert } = this.props;
-  //   if (this.state.username !== '' && this.state.password !== '') {
-  //     if (
-  //       !isEmail(this.state.username) &&
-  //       !isPhoneNumber(this.state.username)
-  //     ) {
-  //       this.setState({ progress: false });
-  //       showAlert('info', 'Login Error', 'Please enter a valid Username');
-  //     } else if (this.state.password.length < 8) {
-  //       this.setState({ progress: false });
-  //       showAlert(
-  //         'info',
-  //         'Login Error',
-  //         'Password should be minimum 8 characters long'
-  //       );
-  //     } else {
-  //       if (isEmail(this.state.username)) {
-  //         this.state.username = this.state.username.toLowerCase();
-  //       }
-  //       login({
-  //         username: this.state.username,
-  //         password: this.state.password
-  //       });
-  //     }
-  //   } else {
-  //     this.setState({ progress: false });
-  //     showAlert('info', 'Login Error', 'Please fill all the fields');
-  //   }
-  // }
+  logIn() {
+    const { loginState, login, showAlert } = this.props;
+    if (this.state.username !== '' && this.state.password !== '') {
+      if (
+        !isEmail(this.state.username) &&
+        !isPhoneNumber(this.state.username)
+      ) {
+        this.setState({ progress: false });
+        showAlert('info', 'Login Error', 'Please enter a valid Username');
+      } else if (this.state.password.length < 8) {
+        this.setState({ progress: false });
+        showAlert(
+          'info',
+          'Login Error',
+          'Password should be minimum 8 characters long'
+        );
+      } else {
+        if (isEmail(this.state.username)) {
+          this.state.username = this.state.username.toLowerCase();
+        }
+        login({
+          username: this.state.username,
+          password: this.state.password
+        });
+      }
+    } else {
+      this.setState({ progress: false });
+      showAlert('info', 'Login Error', 'Please fill all the fields');
+    }
+  }
 
-  // renderForgotPasswordComponent() {
-  //   return <View />;
-  //   return (
-  //     <View style={{ flexDirection: 'row', marginTop: 5 }}>
-  //       <View style={{ flex: 1 }}>
-  //         <Text style={{ margin: 0, padding: 0, alignSelf: 'flex-end' }}>
-  //           Forgot Password?
-  //         </Text>
-  //       </View>
-  //     </View>
-  //   );
-  // }
+  renderForgotPasswordComponent() {
+    return <View />;
+    return (
+      <View style={{ flexDirection: 'row', marginTop: 5 }}>
+        <View style={{ flex: 1 }}>
+          <Text style={{ margin: 0, padding: 0, alignSelf: 'flex-end' }}>
+            Forgot Password?
+          </Text>
+        </View>
+      </View>
+    );
+  }
 
-  // handleSignupPress() {
-  //   const { loginState, navigator } = this.props;
-  //   if (!loginState.loggedIn && !loginState.loggingIn) {
-  //     navigator.push({ id: 'signup_personal' });
-  //   }
-  // }
+  handleSignupPress() {
+    const { loginState, navigator } = this.props;
+    if (!loginState.loggedIn && !loginState.loggingIn) {
+      navigator.push({ id: 'signup_personal' });
+    }
+  }
 
   forgotPassword = () => {
-    // const { loginState, navigator } = this.props;
-    // navigator.push({ id: 'forgotPassword' });
-    // if (!loginState.loggedIn && !loginState.loggingIn) {
-    // navigator.push({ id: 'forgotPassword' });
-    // }
-    this.setState({ writeSomething: 'skjdnsjn' });
+    const { loginState, navigator } = this.props;
+    navigator.push({ id: 'forgotPassword' });
+    if (!loginState.loggedIn && !loginState.loggingIn) {
+      navigator.push({ id: 'forgotPassword' });
+    }
   };
 
-  // getBorderColor() {
-  //   return '#E0E0E0';
-  // }
+  getBorderColor() {
+    return '#E0E0E0';
+  }
 
-  // renderOption() {
-  //   return (
-  //     <View style={{ margin: 10, padding: 0 }}>
-  //       <Text style={{ margin: 0, padding: 0, alignSelf: 'center' }}>OR</Text>
-  //     </View>
-  //   );
-  // }
+  renderOption() {
+    return (
+      <View style={{ margin: 10, padding: 0 }}>
+        <Text style={{ margin: 0, padding: 0, alignSelf: 'center' }}>OR</Text>
+      </View>
+    );
+  }
 
-  // setWidth(event) {
-  //   const { width, height } = event.nativeEvent.layout;
-  //   let w = 0.9 * width;
-  //   this.setState({
-  //     width: w,
-  //     fullWidth: width
-  //   });
-  // }
+  setWidth(event) {
+    const { width, height } = event.nativeEvent.layout;
+    let w = 0.9 * width;
+    this.setState({
+      width: w,
+      fullWidth: width
+    });
+  }
 
   render() {
     return (
@@ -183,7 +180,7 @@ export default class Login extends Component {
             />
           </View>
           <View style={{ height: 50, alignItems: 'stretch', marginBottom: 20 }}>
-            {/* <TextField
+            <TextField
               label={'Email or Mobile Number'}
               keyboardType="email-address"
               inputStyle={{ fontFamily: Constants.MAIN_FONT, padding: 0 }}
@@ -193,10 +190,10 @@ export default class Login extends Component {
               value={this.state.username}
               autoCapitalize={'none'}
               onChangeText={text => this.setState({ username: text })}
-            /> */}
+            />
           </View>
           <View style={{ height: 50, alignItems: 'stretch', marginBottom: 20 }}>
-            {/* <TextField
+            <TextField
               label={'Password'}
               onChangeText={text => this.setState({ password: text })}
               keyboardType="default"
@@ -208,16 +205,16 @@ export default class Login extends Component {
               autoCapitalize={'none'}
               secureTextEntry={true}
               onChangeText={text => this.setState({ password: text })}
-            /> */}
+            />
           </View>
-          {/* {this.renderForgotPasswordComponent()} */}
+          {this.renderForgotPasswordComponent()}
           <View
             style={{
               marginTop: 15,
               position: 'relative',
               alignItems: 'stretch'
             }}
-            // onLayout={event => this.setWidth(event)}
+            onLayout={event => this.setWidth(event)}
           >
             <Button
               raised
@@ -232,7 +229,7 @@ export default class Login extends Component {
                 fontWeight: 'bold'
               }}
               title={'LOGIN'}
-              // onPress={this.logIn.bind(this)}
+              onPress={this.logIn.bind(this)}
             />
           </View>
           <TouchableOpacity onPress={this.forgotPassword}>

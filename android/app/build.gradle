@@ -137,6 +137,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-mixpanel')
+    compile project(':bugsnag-react-native')
     compile project(':react-native-device-info')
     implementation project(':react-native-device-info')
     implementation fileTree(dir: "libs", include: ["*.jar"])

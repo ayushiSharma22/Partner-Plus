@@ -1,0 +1,16 @@
+PODS:
+  - Mixpanel (3.3.7)
+
+DEPENDENCIES:
+  - Mixpanel
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Mixpanel
+
+SPEC CHECKSUMS:
+  Mixpanel: 1e94d1d29dfc3d3c66f734d10e29ad86420889fe
+
+PODFILE CHECKSUM: 4138aa13d614a28f048f0f9a1340282441276f45
+
+COCOAPODS: 1.5.3
