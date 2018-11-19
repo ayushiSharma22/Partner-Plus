@@ -22,13 +22,12 @@ export default class Support extends Component {
           callback();
         }}
       >
-        <View style={{ flex: 1, padding: 15 }}>
+        <View style={{ padding: 15, paddingBottom: 10 }}>
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.card}>
           <View
             style={{
-              flex: 1,
               flexDirection: 'row',
               padding: 20,
               paddingLeft: 10
@@ -36,7 +35,6 @@ export default class Support extends Component {
           >
             <View
               style={{
-                flex: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start'

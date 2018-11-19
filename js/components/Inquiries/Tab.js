@@ -43,7 +43,7 @@ export default class Tab extends Component {
       >
         <View style={[styles.tabTextCover, activeCover]}>
           <Text style={[styles.tabTitle, activeTitle]} numberOfLines={3}>
-            {this.props.label}
+            {this.props.label + ' '}
           </Text>
         </View>
       </TouchableOpacity>
@@ -53,9 +53,6 @@ export default class Tab extends Component {
 
 const styles = StyleSheet.create({
   tabView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     width: 0.25 * ScreenWidth,
     height: 0.07 * ScreenHeight
   },
@@ -69,7 +66,6 @@ const styles = StyleSheet.create({
   },
   tabTextCover: {
     flex: 1,
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },

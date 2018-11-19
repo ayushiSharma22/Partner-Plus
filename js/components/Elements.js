@@ -80,7 +80,7 @@ export class Badge extends Component {
                 }
               ]}
             >
-              {this.props.message}
+              {this.props.message + ' '}
             </Text>
           </View>
         </View>
@@ -100,6 +100,7 @@ const BadgeStyles = StyleSheet.create({
   badgeText: {
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: '',
     padding: 0,
     margin: 0,
     textAlign: 'center'
@@ -118,17 +119,23 @@ export function renderEmptyScreen(
   return (
     <View
       style={{
-        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
         marginTop: 50,
         paddingLeft: 20,
         paddingRight: 20
       }}
     >
       <Image source={require('../../img/empty.png')} resizeMode="cover" />
-      <Text style={{ color: '#34495e', fontSize: 20, fontWeight: 'bold' }}>
-        {title}
+      <Text
+        style={{
+          color: '#34495e',
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginTop: 10,
+          marginBottom: 10
+        }}
+      >
+        {title + ' '}
       </Text>
       <Text style={{ color: '#656565' }}>{message}</Text>
     </View>
@@ -159,7 +166,7 @@ export function failedToLoadScreen() {
           width: imgWidth,
           height: imgWidth
         }}
-        resizeMode={Image.resizeMode.contain}
+        resizeMode="contain"
       />
       <Text style={{ color: '#34495e', fontSize: 20, fontWeight: 'bold' }}>
         Failed to load

@@ -40,7 +40,6 @@ export default class DashboardCard extends Component {
         </View>
         <View
           style={{
-            flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
             paddingLeft: px(10)
@@ -123,9 +122,8 @@ const styles = StyleSheet.create({
     width: 0.1 * ScreenHeight
   },
   alignMiddle: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 10
   },
   starMargin: {
     marginRight: 3,
@@ -135,10 +133,12 @@ const styles = StyleSheet.create({
   userRating: {
     fontSize: 0.045 * ScreenHeight,
     fontWeight: 'bold',
+    textAlign: 'center',
     color: Colors.WHITE
   },
   userRatingText: {
     fontSize: 12,
+    textAlign: 'center',
     color: Colors.WHITE
   },
   bottomText: {

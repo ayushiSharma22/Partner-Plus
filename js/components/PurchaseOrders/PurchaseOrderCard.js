@@ -48,9 +48,7 @@ export default class PurchaseOrderCard extends Component {
       <View style={styles.showDataView}>
         <View style={styles.dataRowView}>
           <View style={styles.dataLeftView}>
-            <Text style={styles.purchaseOrderNumber} numberOfLines={2}>
-              {po_number}
-            </Text>
+            <Text style={styles.purchaseOrderNumber}>{po_number}</Text>
           </View>
           <View style={styles.dataRightView}>
             {status === 'pending' ? (
@@ -71,7 +69,7 @@ export default class PurchaseOrderCard extends Component {
                   value={total_amount}
                   displayType={'text'}
                   thousandSeparator={true}
-                  prefix={'₹'}
+                  prefix={'₹ '}
                   decimalScale={2}
                   renderText={value => <Text>{value}</Text>}
                 />
@@ -86,29 +84,6 @@ export default class PurchaseOrderCard extends Component {
             />
           </View>
         </View>
-      </View>
-    );
-  }
-
-  renderActionView() {
-    return (
-      <View style={styles.actionView}>
-        <TouchableOpacity
-          style={styles.rejectActionView}
-          onPress={() =>
-            this.props.rejectPurchaseOrder(this.props.purchase_order.id)
-          }
-        >
-          <Text style={styles.rejectActionText}>REJECT</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.acceptActionView}
-          onPress={() =>
-            this.props.acceptPurchaseOrder(this.props.purchase_order.id)
-          }
-        >
-          <Text style={styles.acceptActionText}>ACCEPT</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -128,9 +103,6 @@ export default class PurchaseOrderCard extends Component {
 
 const styles = StyleSheet.create({
   purchaseOrderCardView: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'stretch',
     padding: px(1),
     backgroundColor: Colors.WHITE,
     borderRadius: 5,
@@ -147,7 +119,6 @@ const styles = StyleSheet.create({
     }
   },
   showDataView: {
-    flex: 1,
     padding: 0.02 * ScreenWidth
   },
   dataRowView: {
@@ -165,37 +136,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end'
   },
-  actionView: {
-    flex: 3,
-    flexDirection: 'row',
-    borderTopWidth: px(2),
-    borderColor: Colors.BACKGROUND_LIGHT_GREY
-  },
-  acceptActionView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 0.02 * ScreenWidth,
-    borderLeftWidth: px(1),
-    borderColor: Colors.BACKGROUND_LIGHT_GREY
-  },
-  acceptActionText: {
-    fontWeight: 'bold',
-    color: Colors.GREEN
-  },
-  rejectActionView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 0.03 * ScreenWidth,
-    borderRightWidth: px(1),
-    borderColor: Colors.BACKGROUND_LIGHT_GREY
-  },
-  rejectActionText: {
-    fontWeight: 'bold',
-    color: Colors.RED
-  },
   purchaseOrderNumber: {
+    fontFamily: '',
     fontSize: 16,
     fontWeight: '600',
     alignItems: 'center',
@@ -203,7 +145,7 @@ const styles = StyleSheet.create({
     color: Colors.TEXT_BLACK
   },
   purchaseOrderDate: {
-    flex: 1,
+    fontFamily: '',
     alignItems: 'center',
     justifyContent: 'flex-start',
     fontSize: 12
@@ -215,11 +157,11 @@ const styles = StyleSheet.create({
     color: Colors.TEXT_BLACK
   },
   purchaseOrderSettledBadge: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
   fontBold: {
+    fontFamily: '',
     fontWeight: 'bold',
     fontSize: 12
   }

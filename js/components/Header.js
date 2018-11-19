@@ -8,6 +8,7 @@ import { Badge } from './Elements';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icomoonConfig from '../selection.json';
 let ScreenWidth = Dimensions.get('window').width;
+let ScreenHeight = Dimensions.get('window').height;
 
 class StatusBar extends Component {
   constructor(props) {
@@ -37,10 +38,10 @@ class StatusBar extends Component {
     fetchNotifications().then(data => {
       let { init, req } = this.state;
       if (!!data.error) {
-        showAlert('info', 'Error', data.error);
         if (init || req) {
           this.setState({ err: true, ref: false });
         }
+        showAlert('info', 'Error', data.error);
       } else {
         this.setState({
           com: true,
@@ -50,20 +51,6 @@ class StatusBar extends Component {
         });
       }
     });
-  }
-
-  getBizongoHeaderOld() {
-    return (
-      <Thumbnail
-        square
-        source={require('../../img/bizongo-logo.png')}
-        style={{ width: 100, height: 20 }}
-      />
-    );
-  }
-
-  getBizongoHeader() {
-    return <Image source={require('../../img/partner_plus_3x.png')} />;
   }
 
   getHeight(event) {
@@ -113,9 +100,15 @@ class StatusBar extends Component {
     i++;
     if (this.props.heading == 'default') {
       heading.push(
-        <Title key={i}>
-          <Image source={require('../../img/partner_plus_3x.png')} />
-        </Title>
+        <Image
+          key={i}
+          source={require('../../img/partner_plus_3x.png')}
+          defaultSource={require('../../img/partner_plus_3x.png')}
+          style={{
+            height: 0.035 * ScreenHeight,
+            width: 0.5 * ScreenWidth
+          }}
+        />
       );
     } else {
       heading.push(
@@ -139,7 +132,7 @@ class StatusBar extends Component {
           <Button transparent onPress={this.openNotifications.bind(this)}>
             <Image
               source={require('../../img/notification-bell.png')}
-              style={{ height: 0.07 * ScreenWidth, width: 0.05 * ScreenWidth }}
+              style={{ height: 0.04 * ScreenHeight, width: 0.05 * ScreenWidth }}
             />
             {!!this.state.count ? (
               <View

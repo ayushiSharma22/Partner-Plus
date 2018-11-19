@@ -43,7 +43,7 @@ export default class Tab extends Component {
       >
         <View style={[styles.tabTextCover, activeCover]}>
           <Text style={[styles.tabTitle, activeTitle]} numberOfLines={3}>
-            {this.props.label}
+            {this.props.label + ' '}
           </Text>
         </View>
       </TouchableOpacity>

@@ -18,7 +18,7 @@ import Tab from './showTab';
 import * as Colors from '../../../commons/colors';
 import Mixpanel from 'react-native-mixpanel';
 import Modal from 'react-native-modal';
-// import RNFS from 'react-native-fs';
+import Pdf from 'react-native-pdf';
 
 let ScreenHeight = Dimensions.get('window').height;
 let ScreenWidth = Dimensions.get('window').width;
@@ -184,6 +184,33 @@ export default class PurchaseOrder extends Component {
     });
   }
 
+  downloadPurchaseOrder() {
+    let { po_url, id } = this.state.data;
+    const source = { uri: po_url, cache: true };
+    console.log(po_url);
+    if (po_url) {
+      return (
+        <View style={styles.container}>
+          <Pdf
+            source={source}
+            onLoadComplete={(numberOfPages, filePath) => {
+              console.log(`number of pages: ${numberOfPages}`);
+            }}
+            onPageChanged={(page, numberOfPages) => {
+              console.log(`current page: ${page}`);
+            }}
+            onError={error => {
+              console.log(error);
+            }}
+            style={styles.pdf}
+          />
+        </View>
+      );
+    } else {
+      return null;
+    }
+  }
+
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
@@ -222,7 +249,27 @@ export default class PurchaseOrder extends Component {
             </View>
           </View>
         ) : (
-          <Text />
+          <View>
+            {this.state.data ? (
+              <View style={styles.buttonBar}>
+                <View
+                  style={[styles.buttonFullStyle, styles.downloadButtonStyle]}
+                >
+                  <Button
+                    buttonStyle={[
+                      styles.buttonStyle,
+                      styles.downloadButtonStyle
+                    ]}
+                    textStyle={styles.buttonTextStyle}
+                    title={'DOWNLOAD PURCHASE ORDER'}
+                    onPress={() => this.downloadPurchaseOrder()}
+                  />
+                </View>
+              </View>
+            ) : (
+              <Text />
+            )}
+          </View>
         )}
       </View>
     );
@@ -282,12 +329,8 @@ export default class PurchaseOrder extends Component {
   renderData() {
     let { tabName, data, items, dispatchPlans } = this.state;
     let {
-      navigator,
       fetchPurchaseOrder,
       fetchPurchaseOrderItems,
-      fetchPurchaseOrderDispatchPlans,
-      acceptPurchaseOrder,
-      rejectPurchaseOrder,
       purchase_order_id,
       purchaseOrderState,
       showAlert
@@ -469,7 +512,7 @@ const styles = StyleSheet.create({
   scrollView: {
     elevation: 2,
     shadowColor: Colors.BLACK,
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.2,
     shadowRadius: 10,
     shadowOffset: {
       height: 1,
@@ -487,6 +530,12 @@ const styles = StyleSheet.create({
   },
   buttonViewStyle: {
     width: ScreenWidth / 2,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonFullStyle: {
+    width: ScreenWidth,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
@@ -510,6 +559,8 @@ const styles = StyleSheet.create({
   },
   downloadButtonStyle: {
     width: ScreenWidth,
+    marginLeft: 0,
+    marginRight: 0,
     backgroundColor: Colors.PRIMARY_BLUE
   },
   cancelButtonStyle: {
@@ -539,5 +590,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 25
+  },
+  pdf: {
+    flex: 1,
+    width: ScreenWidth
   }
 });

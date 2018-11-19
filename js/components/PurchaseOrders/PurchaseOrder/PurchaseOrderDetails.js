@@ -154,7 +154,8 @@ export default class PurchaseOrderDetails extends Component {
     let { created_at } = this.state.details;
     let { items } = this.props;
     showCircle =
-      items.bizongo_po_items[0] && items.bizongo_po_items[0].status == 'pending';
+      items.bizongo_po_items[0] &&
+      items.bizongo_po_items[0].status == 'pending';
     time_remaining = Moment(new Date()).diff(Moment(created_at), 'hours');
     time_remaining = time_remaining > 48 ? 0 : 48 - time_remaining;
     percent = time_remaining / 48;

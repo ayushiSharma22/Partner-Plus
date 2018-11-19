@@ -1,5 +1,5 @@
 export default {
-  mode: 'prod',
+  mode: 'staging',
   gst: true,
   local: {
     base_url: 'https://localhost:3000/',

@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
   },
   footerValueText: {
     fontSize: 12,
+    fontFamily: '',
     color: Colors.TEXT_BLACK
   },
   fontBold: {

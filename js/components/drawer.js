@@ -280,13 +280,11 @@ export default class ThreePanels extends Component {
 
   renderDrawer() {
     const { logout, productReset, userState, navigator } = this.props;
-    // const menu = <Menu navigator={navigator} />;
     return (
       <Drawer
-        // menu={menu}
         type="overlay"
         ref="myDrawer"
-        menu={
+        content={
           <DrawerContent
             userState={userState}
             logout={logout}

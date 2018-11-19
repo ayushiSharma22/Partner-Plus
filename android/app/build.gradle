@@ -137,10 +137,14 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-mixpanel')
     compile project(':bugsnag-react-native')
-    compile project(':react-native-device-info')
+    implementation project(':react-native-pdf')
+    implementation project(':rn-fetch-blob')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-mixpanel')
+    implementation project(':bugsnag-react-native')
+    implementation project(':react-native-device-info')
     implementation project(':react-native-device-info')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

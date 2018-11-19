@@ -23,13 +23,13 @@ let ScreenHeight = Dimensions.get('window').height;
 let tabs = [
   {
     name: 'open',
-    label: 'Pending',
+    label: 'Pending ',
     status: ['pending'],
     heading: 'PENDING'
   },
   {
     name: 'closed',
-    label: 'Closed',
+    label: 'Closed ',
     status: ['completed', 'cancelled', 'short_closed', 'closed', 'excess'],
     heading: 'CLOSED'
   }

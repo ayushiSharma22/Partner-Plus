@@ -149,14 +149,20 @@ export default class ResetPassword extends Component {
             </Card>
           </View>
           <View
-            style={{ flexDirection: 'row', alignItems: 'stretch', margin: 10 }}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'stretch',
+              margin: 10,
+              marginLeft: 0
+            }}
           >
             <Button
               raised
               buttonStyle={{
                 backgroundColor: '#34495E',
                 borderRadius: 3,
-                width: ScreenWidth
+                width: ScreenWidth / 2,
+                marginLeft: 0
               }}
               textStyle={{
                 textAlign: 'center',

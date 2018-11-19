@@ -72,7 +72,7 @@ export default class Advanced extends React.Component {
             margin: 15,
             borderRadius: this.state.imageWidth / 2
           }}
-          resizeMode={Image.resizeMode.contain}
+          resizeMode="contain"
         />
       </View>
     );

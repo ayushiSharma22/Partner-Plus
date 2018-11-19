@@ -84,14 +84,7 @@ const styles = StyleSheet.create({
   },
   card: {
     elevation: 0,
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000000',
-    shadowOpacity: 0.3,
-    shadowRadius: 1,
-    shadowOffset: {
-      height: 2,
-      width: 0.3
-    }
+    backgroundColor: '#FFFFFF'
   },
   cardImage: {
     flex: 1

@@ -26,28 +26,22 @@ export default class Welcome extends Component {
   }
   loadData() {
     const { getState, loginState, navigator, fetchAppUpdates } = this.props;
-    console.log(this.props);
     if (loginState.loggedIn) {
       navigator.replace({ id: 'home' });
     } else {
-      console.log(this.state);
       this.setState({ request: true });
       getState().then(data => {
-        console.log(this.state);
-        console.log(data);
         if (data.loggedIn) {
           this.setState({ routeId: 'home' });
         } else {
           this.setState({ routeId: 'login' });
         }
         fetchAppUpdates().then(updateData => {
-          console.log(updateData);
           this.setState({ request: false });
           if (!updateData.errors) {
             this.setState({ complete: true });
             let { navigator } = this.props;
             let { routeId } = this.state;
-            console.log(this.state);
             if (routeId) {
               navigator.push({ id: routeId });
             }

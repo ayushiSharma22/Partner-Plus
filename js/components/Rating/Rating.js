@@ -14,7 +14,6 @@ import { px } from '../../commons/helper';
 import * as Colors from '../../commons/colors';
 import * as Constants from '../../commons/Constants';
 import { Grid, Row, Col } from 'react-native-easy-grid';
-let ScreenHeight = Dimensions.get('window').height;
 import ProgressBar from 'react-native-progress/Bar';
 import { failedToLoadScreen } from '../Elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -25,6 +24,7 @@ import Mixpanel from 'react-native-mixpanel';
 import NumberFormat from 'react-number-format';
 
 let ScreenWidth = Dimensions.get('window').width;
+let ScreenHeight = Dimensions.get('window').height;
 let svgWidth = 0.03 * ScreenWidth;
 
 export default class Rating extends Component {
@@ -45,7 +45,7 @@ export default class Rating extends Component {
   }
 
   loadData() {
-    const { fetchSellerDashboard, userState } = this.props;
+    const { userState } = this.props;
     this.setState({ init: false, req: true, userData: userState });
     this.loadRatingData();
   }
@@ -67,7 +67,6 @@ export default class Rating extends Component {
   }
 
   handleRefresh() {
-    const { fetchRating, showAlert } = this.props;
     this.setState({
       ref: true
     });
@@ -78,20 +77,24 @@ export default class Rating extends Component {
     let { current_rating } = this.state.rating;
     targetRating = 5;
     if (current_rating > 4.5) {
-      (targetRating = 5), (targetOutstanding = 70);
+      targetRating = 5;
+      targetOutstanding = 70;
     } else if (current_rating > 4) {
-      (targetRating = 4.5), (targetOutstanding = 70);
+      targetRating = 4.5;
+      targetOutstanding = 70;
     } else if (current_rating > 3.5) {
-      (targetRating = 4), (targetOutstanding = 50);
+      targetRating = 4;
+      targetOutstanding = 50;
     } else {
-      (targetRating = 3.5), (targetOutstanding = 40);
+      targetRating = 3.5;
+      targetOutstanding = 40;
     }
     if (current_rating == 5) {
       //do nothing
     } else {
       return (
-        <View style={styles.greenCard}>
-          <View style={{ flexDirection: 'row' }}>
+        <Grid style={styles.greenCard}>
+          <Row>
             <Text style={styles.greenCardText}>Reach </Text>
             <Text style={styles.greenCardTextBold}>{targetRating}</Text>
             <View style={styles.ratingWhite}>
@@ -99,13 +102,13 @@ export default class Rating extends Component {
             </View>
             <Text style={styles.greenCardText}> and get upto </Text>
             <Text style={styles.greenCardTextBold}>
-              {targetOutstanding}% outstanding
+              {targetOutstanding + '% of outstanding'}
             </Text>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
+          </Row>
+          <Row>
             <Text style={styles.greenCardText}> amount paid early!!! </Text>
-          </View>
-        </View>
+          </Row>
+        </Grid>
       );
     }
   }
@@ -115,7 +118,7 @@ export default class Rating extends Component {
     let { current_rating, outstanding_percentage } = this.state.rating;
     return (
       <View style={styles.ratingDetailsCard}>
-        <Grid style={{ flexDirection: 'row' }}>
+        <Grid>
           <Col size={60}>
             <Text style={styles.headerMain}>Dear,</Text>
             <Text style={styles.profileName}>{user.name}</Text>
@@ -138,7 +141,6 @@ export default class Rating extends Component {
           <Col size={40}>
             <View
               style={{
-                flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingLeft: px(10)
@@ -195,7 +197,7 @@ export default class Rating extends Component {
         {current_rating < 3.5 ? (
           <Text />
         ) : (
-          <Grid style={{ flexDirection: 'row' }}>
+          <Grid>
             <Col>
               <View>
                 <Text style={styles.conditionsText}>
@@ -567,7 +569,6 @@ const styles = StyleSheet.create({
   },
   greenCard: {
     backgroundColor: 'rgba(84,189,72, 0.5)',
-    flex: 5,
     alignItems: 'flex-start',
     margin: px(3),
     padding: px(3),
@@ -587,9 +588,7 @@ const styles = StyleSheet.create({
     fontWeight: '400'
   },
   greenCardTextBold: {
-    fontSize: 16,
-    color: Colors.WHITE,
-    fontWeight: 'bold'
+    color: Colors.WHITE
   },
   ratingDetailsCard: {
     backgroundColor: Colors.BACKGROUND_GREY,
@@ -649,9 +648,8 @@ const styles = StyleSheet.create({
     width: px(20)
   },
   alignMiddle: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 10
   },
   starMargin: {
     marginRight: 3,
@@ -659,12 +657,14 @@ const styles = StyleSheet.create({
     width: 13
   },
   userRating: {
-    fontSize: 36,
+    fontSize: 0.045 * ScreenHeight,
+    textAlign: 'center',
     fontWeight: 'bold',
     color: Colors.WHITE
   },
   userRatingText: {
     fontSize: 12,
+    textAlign: 'center',
     color: Colors.WHITE,
     fontWeight: 'bold'
   },

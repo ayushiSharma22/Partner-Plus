@@ -26,6 +26,7 @@ import QuotationSubmit from './Inquiries/InquiryPage/Quotation/';
 // Import all actions
 import * as AuthActions from '../actions/AuthActions';
 import * as InquiryActions from '../actions/InquiryActions';
+import * as SignUpActions from '../actions/SignUpActions';
 import * as PurchaseOrderActions from '../actions/PurchaseOrderActions';
 import { userConfirmation } from '../actions/UserActions';
 import {
@@ -114,6 +115,7 @@ class Index extends Component {
       logout,
       fetchRating,
       fetchSettlements,
+      loadCategories,
       userConfirmation,
       fetchCompany,
       saveCompanyDetails,
@@ -546,6 +548,7 @@ Index.propTypes = {
   saveStatutoryData: PropTypes.func.isRequired,
   fetchInquiries: PropTypes.func.isRequired,
   submitQuote: PropTypes.func.isRequired,
+  loadCategories: PropTypes.func.isRequired,
   fetchInquiry: PropTypes.func.isRequired,
   fetchInquiryHistory: PropTypes.func.isRequired,
   rejectBid: PropTypes.func.isRequired,
@@ -561,16 +564,11 @@ let mapStateToProps = state => {
   return {
     mainState: state,
     loginState: state.auth,
-    // settlementState: state.settlement,
-    // productsListState: state.productsList,
-    // productState: state.product,
     signupState: state.signup,
     userState: state.user,
     notificationsState: state.notifications,
     ratingState: state.rating,
     companyState: state.company,
-    // orderState: state.order,
-    // stockState: state.stocks,
     inquiryState: state.inquiry,
     inquiryHistoryState: state.history,
     purchaseOrderState: state.purchase_order
@@ -594,6 +592,7 @@ let mapDispatchToProps = dispatch => {
       dispatch(NotificationActions.fetchNotifications(options)),
     updateNotifications: ids =>
       dispatch(NotificationActions.updateNotifications(ids)),
+    loadCategories: () => dispatch(SignUpActions.loadCategories()),
     fetchInquiries: options => dispatch(InquiryActions.fetchInquiries(options)),
     submitQuote: (requestData, inquiry_id) =>
       dispatch(InquiryActions.submitQuote(requestData, inquiry_id)),

@@ -181,8 +181,8 @@ export default class Inquiries extends Component {
       return component;
     } else {
       return renderEmptyScreen(
-        'No Quotes',
-        "Currently you don't have any active Quotes in this Section"
+        'No Quotes ',
+        "Currently you don't have any active Quotes in this Section "
       );
     }
   }
@@ -204,7 +204,7 @@ export default class Inquiries extends Component {
     }
   }
 
-  makeItems = (nItems, tabs, styles) => {
+  makeItems = (nItems, tabs) => {
     const items = [];
     active_tab = this.state.req_params.status;
     for (tab in tabs) {
@@ -232,13 +232,9 @@ export default class Inquiries extends Component {
         key="scrollView"
         horizontal
         showsHorizontalScrollIndicator={true}
-        contentContainerStyle={{ flex: 1 }}
         style={styles.scrollViewStyle}
       >
-        {this.makeItems(tabs.length, tabs, [
-          styles.itemWrapper,
-          styles.horizontalItemWrapper
-        ])}
+        {this.makeItems(tabs.length, tabs)}
       </ScrollView>
     );
     const horizontalScrollView = <View style={styles.scrollView}>{items}</View>;
@@ -269,7 +265,7 @@ export default class Inquiries extends Component {
   renderContent() {
     return (
       <ScrollView
-        style={{ flex: 1, backgroundColor: Colors.BACKGROUND_LIGHT_GREY }}
+        style={{ backgroundColor: Colors.BACKGROUND_LIGHT_GREY }}
         refreshControl={
           <RefreshControl
             refreshing={this.state.ref}
@@ -353,6 +349,7 @@ export default class Inquiries extends Component {
         {this.renderStages()}
         <FAB
           large
+          style={{ flex: 1 }}
           title={'Title'}
           buttonColor={buttonColor}
           visible={true}
@@ -389,7 +386,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.TEXT_BLACK
   },
   itemWrapper: {
-    padding: px(3)
+    padding: px(2)
   },
   horizontalItemWrapper: {
     color: Colors.TEXT_BLACK

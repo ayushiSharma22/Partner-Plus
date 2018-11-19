@@ -91,7 +91,8 @@ export default class Login extends Component {
             style={{
               marginTop: 15,
               flexDirection: 'row',
-              alignItems: 'stretch'
+              alignItems: 'stretch',
+              marginLeft: 0
             }}
           >
             <Button

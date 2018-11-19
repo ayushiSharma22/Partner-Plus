@@ -5,7 +5,8 @@ import {
   Platform,
   PixelRatio,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 import Text from '../../../Text';
 import * as Constants from '../../../../commons/Constants';
@@ -21,6 +22,8 @@ import UploadProfileImage from '../../../../services/uploadProfileImage';
 import ImagePicker from 'react-native-image-picker';
 import * as Colors from '../../../../commons/colors';
 import { Card, CardTitle, CardContent } from '../../../CardThreeLevel';
+
+let ScreenWidth = Dimensions.get('window').width;
 
 export default class Advanced extends Component {
   constructor(props) {
@@ -450,15 +453,20 @@ export default class Advanced extends Component {
     if (this.state.editing) {
       return (
         <View
-          style={{ flexDirection: 'row', alignItems: 'stretch', margin: 10 }}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: 10
+          }}
         >
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flex: 1 }}>
             <Button
               raised
               buttonStyle={{
                 backgroundColor: '#34495E',
                 borderRadius: 3,
-                width: ScreenWidth
+                width: ScreenWidth / 2.5
               }}
               textStyle={{
                 textAlign: 'center',
@@ -470,13 +478,13 @@ export default class Advanced extends Component {
               onPress={event => this.handleSubmit(event, this.state)}
             />
           </View>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flex: 1 }}>
             <Button
               raised
               buttonStyle={{
                 backgroundColor: '#FFFFFF',
                 borderRadius: 3,
-                width: ScreenWidth
+                width: ScreenWidth / 2.5
               }}
               textStyle={{
                 textAlign: 'center',
